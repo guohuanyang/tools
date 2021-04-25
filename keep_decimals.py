@@ -12,8 +12,8 @@
 from decimal import Decimal
 
 
-class KeepDecimal:
-    version = "1.0"
+class ExactRounding:
+    version = "1.00"
 
     @staticmethod
     def _gen_keep_format(keep_num):
@@ -32,8 +32,28 @@ class KeepDecimal:
         return Decimal(str(number)).quantize(Decimal(keep_format), rounding="ROUND_HALF_UP")
 
 
+class UnExactRounding:
+    version = "1.00"
+
+    @staticmethod
+    def rounding(number, keep_num):
+        if keep_num == 0:
+            return number
+        return float("%.{}f".format(keep_num) % number)
+
+
+class Truncate_Reserve:
+    version = "1.00"
+
+    @staticmethod
+    def rounding(number, keep_num):
+        if keep_num == 0:
+            return int(number)
+        return int(number*10**keep_num)/10**keep_num
+
+
 if __name__ == '__main__':
-    obj = KeepDecimal()
+    obj = Truncate_Reserve()
     print(obj.rounding(1, 0))
     print(obj.rounding(2, 1))
     print(obj.rounding(1.345, 2))
