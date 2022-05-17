@@ -58,5 +58,5 @@ def gen_sql_file(excel_file, sql_file):
 
 
 if __name__ == '__main__':
-    gen_sql_file('new.xlsx', 'update_task_creator_name_subject.sql')
+    gen_sql_file('new.xlsx', 'update_task_creator_name_subject_pro.sql')
     print('done')

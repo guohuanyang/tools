@@ -44,17 +44,21 @@ def update_data(filepath, txt_file):
     print(f"task条数:{len(data_list)}")
     txt_data = read_txt(txt_file)
     name_dict = gen_dict(txt_data)
+    new_data_list = []
+    error_list = []
     for row in data_list:
         try:
             username = row[username_index]
             user_id = name_dict[username]
             row[username_index] = int(user_id)
+            new_data_list.append(row)
         except Exception as e:
-            print(row)
-            print(e)
-
-    create(data_list, 'new.xlsx')
+            error_list.append(row[2])
+            # print(row)
+            # print(e)
+    print(set(error_list))
+    create(new_data_list, 'new.xlsx')
 
 
 if __name__ == '__main__':
-    update_data('测试流水历史数据-20211224111055.xlsx', '111.txt')
+    update_data('流水历史-生产.xlsx', '222.txt')
